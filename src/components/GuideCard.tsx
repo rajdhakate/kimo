@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import CustomText from './CustomText';
+import FastImage from 'react-native-fast-image';
 
 type Props = {
   name: string;
@@ -25,10 +26,10 @@ const GuideCard = ({name, subtitle}: Props) => {
         </View>
 
         <View style={styles.avatarContainer}>
-          <Image
+          <FastImage
             style={styles.fullImage}
             source={require('../assets/pngs/Head.png')}
-            resizeMode="cover"
+            resizeMode={FastImage.resizeMode.cover}
           />
         </View>
       </View>

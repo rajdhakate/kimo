@@ -1,15 +1,16 @@
 import {Image, StyleSheet, View} from 'react-native';
 import React from 'react';
+import FastImage from 'react-native-fast-image';
 
 type Props = {};
 
 const LogoHeader = (props: Props) => {
   return (
     <View style={styles.topBarContainer}>
-      <Image
+      <FastImage
         style={styles.fullImage}
         source={require('./../assets/pngs/TopBar.png')}
-        resizeMode="contain"
+        resizeMode={FastImage.resizeMode.contain}
       />
     </View>
   );

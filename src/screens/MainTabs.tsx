@@ -1,7 +1,12 @@
 import {StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import {useDispatch, useSelector} from 'react-redux';
+
 import Home from './Home';
+import Detail from './Detail';
+
+import {fetchHighlights} from '../actions/hightlights';
 
 import HomeIcon from './../assets/svgs/HomeIcon';
 import SurfingIcon from './../assets/svgs/SurfingIcon';
@@ -13,6 +18,13 @@ const Tab = createMaterialBottomTabNavigator();
 type Props = {};
 
 const MainTabs = (props: Props) => {
+  const dispatch = useDispatch();
+  const highlights = useSelector(state => state.highlights);
+
+  useEffect(() => {
+    dispatch(fetchHighlights());
+  }, [dispatch]);
+
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -27,19 +39,23 @@ const MainTabs = (props: Props) => {
             return <HomeIcon color={iconColor} />;
           } else if (route.name === 'Surfing') {
             return <SurfingIcon color={iconColor} />;
-          } else if (route.name === 'Hula') {
+          } else if (route.name === 'Traditional Festivals') {
             return <HulaIcon color={iconColor} />;
-          } else if (route.name === 'Vulcano') {
+          } else if (route.name === 'Volcanoes') {
             return <VulcanoIcon color={iconColor} />;
           }
         },
-        // tabBarActiveTintColor: 'red',
-        // tabBarInactiveTintColor: 'yellow',
       })}>
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Surfing" component={Home} />
-      <Tab.Screen name="Hula" component={Home} />
-      <Tab.Screen name="Vulcano" component={Home} />
+
+      {highlights.map(highlight => (
+        <Tab.Screen
+          key={highlight.title}
+          name={highlight.title}
+          component={Detail}
+          initialParams={{highlight}}
+        />
+      ))}
     </Tab.Navigator>
   );
 };

@@ -4,13 +4,13 @@ import CustomText from './CustomText';
 import Arrow from './../assets/svgs/Arrow.svg';
 
 type Props = {
-  title: string;
+  category: object;
 };
 
-const CategoryCard = ({title}: Props) => {
+const CategoryCard = ({category}: Props) => {
   return (
     <TouchableOpacity style={styles.card}>
-      <CustomText text={title} textType="body" />
+      <CustomText text={category.name} textType="body" />
       <Arrow />
     </TouchableOpacity>
   );

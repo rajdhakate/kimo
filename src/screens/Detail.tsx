@@ -1,47 +1,67 @@
-import {
-  Image,
-  RefreshControl,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import React from 'react';
+import {Image, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import CustomHeader from '../components/CustomHeader';
 import GuideCard from '../components/GuideCard';
 import LogoHeader from '../components/LogoHeader';
 import CustomText from '../components/CustomText';
 import SpotCard from '../components/SpotCard';
+import axiosInstance from '../apis/AxiosInstance';
+import FastImage from 'react-native-fast-image';
 
-type Props = {};
+type Props = {
+  route: any;
+};
 
-const Detail = (props: Props) => {
+const Detail = ({route}: Props) => {
+  const {highlight} = route.params;
+
+  const [highlightData, setHighlightData] = useState();
+
+  const fetchActivity = async () => {
+    try {
+      const response = await axiosInstance.get(
+        `/v1/activities/${highlight.title}`,
+      );
+      setHighlightData(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchActivity();
+  }, [highlight]);
+
+  const renderActivityItem = activity => {
+    return <SpotCard key={activity.name} activity={activity} />;
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.container}>
           <LogoHeader />
           <View style={styles.headContainer}>
-            <Image
+            <FastImage
               style={styles.fullImage}
-              source={require('./../assets/pngs/Head.png')}
-              resizeMode="contain"
+              source={{uri: highlightData?.image}}
+              resizeMode={FastImage.resizeMode.cover}
             />
           </View>
 
           <CustomText
             style={{padding: 16, paddingTop: 40, lineHeight: 24}}
             textType="body"
-            text="Hawaii is the capital of modern surfing. This group of Pacific islands gets swell from all directions, so there are plenty of pristine surf spots for all."
+            text={highlightData?.description}
           />
 
-          <CustomHeader title="Top spots" />
+          {highlightData?.activities.length > 0 && (
+            <View style={{marginBottom: 100}}>
+              <CustomHeader title="Top spots" />
 
-          <SpotCard />
-          <SpotCard />
-          <SpotCard />
-          <SpotCard />
+              {highlightData.activities.map(renderActivityItem)}
+            </View>
+          )}
         </View>
 
         <View style={{flex: 1, backgroundColor: '#E6F2F2'}}>
@@ -59,6 +79,7 @@ export default Detail;
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    backgroundColor: '#ffffff',
   },
   scrollView: {
     flex: 1,

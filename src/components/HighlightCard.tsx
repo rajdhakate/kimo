@@ -1,28 +1,41 @@
-import {Dimensions, Image, StyleSheet, View} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import CustomText from './CustomText';
 
 import ArrowCircular from './../assets/svgs/ArrowCircular.svg';
+import Highlight from '../models/Highlight';
 
-type Props = {};
+type Props = {
+  highlight: Highlight;
+};
 
 const width = Dimensions.get('screen').width;
 
-const HighlightCard = (props: Props) => {
+const HighlightCard = ({highlight}: Props) => {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card}>
       <View style={styles.imageContainer}>
         <Image
           style={styles.fullImage}
-          source={require('./../assets/pngs/Image.png')}
+          source={{uri: highlight.image}}
           resizeMode="cover"
         />
 
         <View style={styles.details}>
           <View style={styles.texts}>
-            <CustomText text="Surfing" style={styles.title} textType="header" />
             <CustomText
-              text="Best Hawaiian islands for surfing."
+              text={highlight.title}
+              style={styles.title}
+              textType="header"
+            />
+            <CustomText
+              text={highlight.description}
               style={styles.subtitle}
               textType="body"
             />
@@ -31,7 +44,7 @@ const HighlightCard = (props: Props) => {
           <ArrowCircular />
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

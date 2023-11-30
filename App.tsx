@@ -1,16 +1,18 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import Home from './src/screens/Home';
-import Detail from './src/screens/Detail';
-import MainTabs from './src/screens/MainTabs';
-
+import {Provider} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
+
+import store from './src/store';
+import MainTabs from './src/screens/MainTabs';
 
 function App(): JSX.Element {
   return (
-    <NavigationContainer>
-      <MainTabs />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <MainTabs />
+      </NavigationContainer>
+    </Provider>
   );
 }
 

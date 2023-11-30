@@ -1,22 +1,28 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import CustomText from './CustomText';
 
-type Props = {};
+type Props = {
+  activity: object;
+};
 
-const SpotCard = (props: Props) => {
+const SpotCard = ({activity}: Props) => {
   return (
-    <View style={styles.card}>
-      <CustomText text="1. Maui" textType="body-bold" style={styles.title} />
+    <TouchableOpacity style={styles.card}>
+      <CustomText
+        text={activity.name}
+        textType="body-bold"
+        style={styles.title}
+      />
 
       <View style={styles.imageContainer}>
         <Image
           style={styles.fullImage}
-          source={require('./../assets/pngs/Head.png')}
+          source={{uri: 'https://picsum.photos/300/200'}}
           resizeMode="cover"
         />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -24,27 +30,29 @@ export default SpotCard;
 
 const styles = StyleSheet.create({
   card: {
+    flex: 1,
     backgroundColor: '#ffffff',
     borderRadius: 4,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    margin: 16,
+    marginHorizontal: 16,
+    marginTop: 8,
     shadowColor: 'rgba(0, 128, 128, 0.16)',
     shadowOffset: {width: 0, height: 0},
     shadowOpacity: 1,
-    shadowRadius: 16,
+    shadowRadius: 8,
   },
   title: {
     color: '#008080',
     marginLeft: 16,
     marginVertical: 30,
+    width: '55%',
   },
   imageContainer: {
-    aspectRatio: 120 / 63,
     overflow: 'hidden',
     borderTopRightRadius: 4,
     borderBottomRightRadius: 4,
-    maxWidth: '40%',
+    width: '40%',
   },
   fullImage: {
     width: '100%',

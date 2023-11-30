@@ -7,27 +7,56 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 
 import HighlightCard from '../components/HighlightCard';
 import CustomHeader from '../components/CustomHeader';
-import CustomText from '../components/CustomText';
-import Arrow from './../assets/svgs/Arrow.svg';
 import CategoryCard from '../components/CategoryCard';
 import GuideCard from '../components/GuideCard';
 import LogoHeader from '../components/LogoHeader';
+import axiosInstance from '../apis/AxiosInstance';
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchHighlights} from '../actions/hightlights';
 
 type Props = {};
 
 const Home = (props: Props) => {
+  const dispatch = useDispatch();
+  const highlights = useSelector(state => state.highlights);
+  const [categories, setCategories] = useState([]);
   const [isRefreshing, setRefreshing] = useState(false);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 1000);
+    fetchCategories();
   }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axiosInstance.get('/v1/categories');
+      setCategories(response.data);
+      setRefreshing(false);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCategories();
+    dispatch(fetchHighlights());
+  }, [dispatch]);
+
+  const highlightKeyExtractor = item => {
+    return item.title.toString();
+  };
+
+  const renderHighlightItem = ({index, item}) => {
+    return <HighlightCard highlight={item} />;
+  };
+
+  const renderCategoryItem = category => {
+    return <CategoryCard key={categories.name} category={category} />;
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -53,25 +82,29 @@ const Home = (props: Props) => {
           </View>
         </View>
 
-        <CustomHeader title="Highlights" />
+        {highlights.length > 0 && (
+          <View>
+            <CustomHeader title="Highlights" />
 
-        <ScrollView
-          horizontal
-          style={{height: 340, width: '100%', marginBottom: 40}}
-          showsHorizontalScrollIndicator={false}>
-          <HighlightCard />
-          <HighlightCard />
-          <HighlightCard />
-        </ScrollView>
+            <FlatList
+              style={{height: 340, width: '100%', marginBottom: 40}}
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={highlightKeyExtractor}
+              data={highlights}
+              horizontal
+              renderItem={renderHighlightItem}
+            />
+          </View>
+        )}
 
         <View style={{flex: 1, backgroundColor: '#E6F2F2'}}>
-          <CustomHeader title="Categories" />
+          {categories.length > 0 && (
+            <View>
+              <CustomHeader title="Categories" />
 
-          <CategoryCard title="Adventure" />
-          <CategoryCard title="Culinary" />
-          <CategoryCard title="Eco-tourism" />
-          <CategoryCard title="Family" />
-          <CategoryCard title="Sport" />
+              {categories.map(renderCategoryItem)}
+            </View>
+          )}
 
           <CustomHeader title="Travel Guide" />
 
