@@ -15,6 +15,7 @@ import CustomText from '../components/CustomText';
 import Arrow from './../assets/svgs/Arrow.svg';
 import CategoryCard from '../components/CategoryCard';
 import GuideCard from '../components/GuideCard';
+import LogoHeader from '../components/LogoHeader';
 
 type Props = {};
 
@@ -22,17 +23,10 @@ const Home = (props: Props) => {
   const [isRefreshing, setRefreshing] = useState(false);
 
   const onRefresh = useCallback(() => {
-    // Set the refreshing state to true
     setRefreshing(true);
-
-    // Perform the data fetching or any asynchronous operation
-    // For example, you can fetch data from an API here
-
-    // After the operation is complete, set refreshing to false
-    // to stop the refreshing indicator
     setTimeout(() => {
       setRefreshing(false);
-    }, 1000); // Simulating an asynchronous operation duration
+    }, 1000);
   }, []);
 
   return (
@@ -48,13 +42,8 @@ const Home = (props: Props) => {
           />
         }>
         <View style={styles.container}>
-          <View style={styles.topBarContainer}>
-            <Image
-              style={styles.fullImage}
-              source={require('./../assets/pngs/TopBar.png')}
-              resizeMode="contain"
-            />
-          </View>
+          <LogoHeader />
+
           <View style={styles.headContainer}>
             <Image
               style={styles.fullImage}
@@ -104,10 +93,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-  },
-  topBarContainer: {
-    width: '100%',
-    aspectRatio: 359 / 80,
   },
   headContainer: {
     width: '100%',
