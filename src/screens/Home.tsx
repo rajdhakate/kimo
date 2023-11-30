@@ -18,6 +18,7 @@ import axiosInstance from '../apis/AxiosInstance';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchHighlights} from '../actions/hightlights';
 import {backgroundColor, primaryColor, primaryLight} from '../theme/colors';
+import PrimaryButton from '../components/PrimaryButton';
 
 type Props = {};
 
@@ -98,7 +99,8 @@ const Home = (props: Props) => {
           </View>
         )}
 
-        <View style={{flex: 1, backgroundColor: primaryLight}}>
+        <View
+          style={{flex: 1, backgroundColor: primaryLight, paddingBottom: 80}}>
           {categories.length > 0 && (
             <View>
               <CustomHeader title="Categories" />
@@ -112,6 +114,8 @@ const Home = (props: Props) => {
           <GuideCard name="Raj Dhakate" subtitle="Guide since 2012" />
         </View>
       </ScrollView>
+
+      <PrimaryButton cta="Book a trip" />
     </SafeAreaView>
   );
 };

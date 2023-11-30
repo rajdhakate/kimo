@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import React, {useEffect} from 'react';
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useDispatch, useSelector} from 'react-redux';
 
 import Home from './Home';
@@ -8,13 +8,9 @@ import Detail from './Detail';
 
 import {fetchHighlights} from '../actions/hightlights';
 
-import HomeIcon from './../assets/svgs/HomeIcon';
-import SurfingIcon from './../assets/svgs/SurfingIcon';
-import HulaIcon from './../assets/svgs/HulaIcon';
-import VulcanoIcon from './../assets/svgs/VulcanoIcon';
-import {backgroundColor, primaryColor, secondaryColor} from '../theme/colors';
+import TabBar from './Tabbar';
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 type Props = {};
 
@@ -29,25 +25,8 @@ const MainTabs = (props: Props) => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      activeColor={primaryColor}
-      inactiveColor={secondaryColor}
-      barStyle={{backgroundColor: backgroundColor}}
-      screenOptions={({route}) => ({
-        tabBarIcon: ({focused, color, size}) => {
-          let iconColor = focused ? primaryColor : secondaryColor;
-
-          if (route.name === 'Home') {
-            return <HomeIcon color={iconColor} />;
-          } else if (route.name === 'Surfing') {
-            return <SurfingIcon color={iconColor} />;
-          } else if (route.name === 'Traditional Festivals') {
-            return <HulaIcon color={iconColor} />;
-          } else if (route.name === 'Volcanoes') {
-            return <VulcanoIcon color={iconColor} />;
-          }
-        },
-      })}>
-      <Tab.Screen name="Home" component={Home} />
+      tabBar={props => <TabBar {...props} />}>
+      <Tab.Screen name="Home" component={Home} options={{headerShown: false}} />
 
       {highlights.map(highlight => (
         <Tab.Screen
@@ -55,6 +34,7 @@ const MainTabs = (props: Props) => {
           name={highlight.title}
           component={Detail}
           initialParams={{highlight}}
+          options={{headerShown: false}}
         />
       ))}
     </Tab.Navigator>

@@ -6,9 +6,10 @@ type Props = {
   textType?: 'body' | 'body-bold' | 'header';
   text: string;
   style?: object;
+  numberOfLines?: number | undefined;
 };
 
-const CustomText = ({text, style, textType}: Props) => {
+const CustomText = ({text, style, textType, numberOfLines}: Props) => {
   let textStyle: {};
   switch (textType) {
     case 'body':
@@ -25,7 +26,11 @@ const CustomText = ({text, style, textType}: Props) => {
       break;
   }
 
-  return <Text style={[textStyle, style]}>{text}</Text>;
+  return (
+    <Text numberOfLines={numberOfLines} style={[textStyle, style]}>
+      {text}
+    </Text>
+  );
 };
 
 export default CustomText;

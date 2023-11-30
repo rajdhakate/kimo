@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Svg, {Mask, Rect, G, Path} from 'react-native-svg';
-const HulaIcon = ({color, props}) => (
+const HulaIcon = ({color, props = {}}) => (
   <Svg
     width={24}
     height={24}

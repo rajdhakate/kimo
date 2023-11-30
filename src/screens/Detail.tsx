@@ -9,6 +9,7 @@ import CustomText from '../components/CustomText';
 import SpotCard from '../components/SpotCard';
 import axiosInstance from '../apis/AxiosInstance';
 import {backgroundColor, primaryLight} from '../theme/colors';
+import PrimaryButton from '../components/PrimaryButton';
 
 type Props = {
   route: any;
@@ -69,14 +70,21 @@ const Detail = ({route}: Props) => {
               {highlightData.activities.map(renderActivityItem)}
             </View>
           )}
-        </View>
 
-        <View style={{flex: 1, backgroundColor: primaryLight}}>
-          <CustomHeader title="Travel Guide" />
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: primaryLight,
+              paddingBottom: showBackButton ? 20 : 80,
+            }}>
+            <CustomHeader title="Travel Guide" />
 
-          <GuideCard name="Raj Dhakate" subtitle="Guide since 2012" />
+            <GuideCard name="Raj Dhakate" subtitle="Guide since 2012" />
+          </View>
         </View>
       </ScrollView>
+
+      {!showBackButton && <PrimaryButton cta="Book a trip" />}
     </SafeAreaView>
   );
 };

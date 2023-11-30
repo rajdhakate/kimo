@@ -43,7 +43,11 @@ const GuideCard = ({name, subtitle}: Props) => {
         onPress={() => {
           setModalVisible(true);
         }}>
-        <CustomText text="Contact" />
+        <CustomText
+          text="Contact"
+          textType="body-bold"
+          style={styles.ctaText}
+        />
       </TouchableOpacity>
 
       <ReactNativeModal
@@ -109,6 +113,9 @@ const styles = StyleSheet.create({
     width: 116,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  ctaText: {
+    color: primaryColor,
   },
   modal: {
     margin: 0,
