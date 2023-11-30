@@ -6,10 +6,11 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import CustomText from './CustomText';
+import {useNavigation} from '@react-navigation/native';
 
 import ArrowCircular from './../assets/svgs/ArrowCircular.svg';
 import Highlight from '../models/Highlight';
+import CustomText from './CustomText';
 
 type Props = {
   highlight: Highlight;
@@ -18,8 +19,14 @@ type Props = {
 const width = Dimensions.get('screen').width;
 
 const HighlightCard = ({highlight}: Props) => {
+  const navigation = useNavigation();
+
   return (
-    <TouchableOpacity style={styles.card}>
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() => {
+        navigation.navigate('Detail', {highlight});
+      }}>
       <View style={styles.imageContainer}>
         <Image
           style={styles.fullImage}
