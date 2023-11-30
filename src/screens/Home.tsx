@@ -87,6 +87,7 @@ export default Home;
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    backgroundColor: '#ffffff',
   },
   scrollView: {
     flex: 1,

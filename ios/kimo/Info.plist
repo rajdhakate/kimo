@@ -54,6 +54,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>IBMPlexMono-Regular.ttf</string>
+		<string>IBMPlexMono-Bold.ttf</string>
 	</array>
 </dict>
 </plist>

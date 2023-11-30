@@ -97,14 +97,14 @@ const styles = StyleSheet.create({
     color: '#001A1A',
   },
   bodyBold: {
-    fontFamily: 'IBMPlexMono-Regular',
+    fontFamily: 'IBMPlexMono-Bold',
     fontWeight: '700',
     fontSize: 16,
     lineHeight: 20,
     color: '#001A1A',
   },
   header: {
-    fontFamily: 'IBMPlexMono-Regular',
+    fontFamily: 'IBMPlexMono-Bold',
     fontWeight: '700',
     fontSize: 24,
     lineHeight: 30,
