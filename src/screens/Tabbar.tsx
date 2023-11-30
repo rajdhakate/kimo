@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'center',
     width: '80%',
+    lineHeight: 16,
   },
   tabBarIndicator: {
     position: 'absolute',
