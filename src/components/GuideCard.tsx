@@ -32,7 +32,9 @@ const GuideCard = ({name, subtitle}: Props) => {
         <View style={styles.avatarContainer}>
           <FastImage
             style={styles.fullImage}
-            source={require('../assets/pngs/Head.png')}
+            source={{
+              uri: 'https://media.licdn.com/dms/image/C5103AQFdh6K9CIxY2Q/profile-displayphoto-shrink_400_400/0/1517549153621?e=1706745600&v=beta&t=ljWAvmdsmn7D0P6S9Cc5BYu2-Mhs8_V9LPXTZuI6LR8',
+            }}
             resizeMode={FastImage.resizeMode.cover}
           />
         </View>
