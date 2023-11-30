@@ -114,6 +114,6 @@ const styles = StyleSheet.create({
     fontSize: 48,
     fontWeight: '700',
     lineHeight: 60,
-    opacity: 0.7,
+    opacity: 0.8,
   },
 });
