@@ -1,14 +1,15 @@
-import {
-  StyleSheet,
-  View,
-  Image,
-  Dimensions,
-  TouchableOpacity,
-} from 'react-native';
-import React from 'react';
+import {StyleSheet, View, Dimensions, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
 import CustomText from './CustomText';
 import FastImage from 'react-native-fast-image';
-import {backgroundColor, primaryColor, secondaryColor} from '../theme/colors';
+import {
+  backdropColor,
+  backgroundColor,
+  primaryColor,
+  secondaryColor,
+} from '../theme/colors';
+import Contact from '../screens/Contact';
+import ReactNativeModal from 'react-native-modal';
 
 type Props = {
   name: string;
@@ -18,6 +19,8 @@ type Props = {
 const avatarSize = Dimensions.get('screen').width * 0.2;
 
 const GuideCard = ({name, subtitle}: Props) => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <View style={styles.card}>
       <View style={styles.details}>
@@ -35,9 +38,31 @@ const GuideCard = ({name, subtitle}: Props) => {
         </View>
       </View>
 
-      <TouchableOpacity style={styles.cta}>
+      <TouchableOpacity
+        style={styles.cta}
+        onPress={() => {
+          setModalVisible(true);
+        }}>
         <CustomText text="Contact" />
       </TouchableOpacity>
+
+      <ReactNativeModal
+        isVisible={modalVisible}
+        statusBarTranslucent={true}
+        backdropColor={backdropColor}
+        backdropOpacity={0.3}
+        style={styles.modal}
+        onBackdropPress={() => {
+          setModalVisible(false);
+        }}
+        animationIn={'slideInUp'}
+        animationOut={'slideOutDown'}>
+        <Contact
+          onClose={() => {
+            setModalVisible(false);
+          }}
+        />
+      </ReactNativeModal>
     </View>
   );
 };
@@ -88,5 +113,10 @@ const styles = StyleSheet.create({
     width: 116,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  modal: {
+    margin: 0,
+    flexDirection: 'row',
+    alignItems: 'flex-end',
   },
 });

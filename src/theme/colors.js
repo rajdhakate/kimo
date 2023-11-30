@@ -4,3 +4,4 @@ export const secondaryColor = '#001A1A';
 export const backgroundColor = '#FFFFFF';
 export const textColor = '#333333';
 export const shadowColor = 'rgba(0, 128, 128, 0.16)';
+export const backdropColor = '#2F312F';
