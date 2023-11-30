@@ -2,12 +2,11 @@ import {Linking, StyleSheet, View} from 'react-native';
 import React from 'react';
 import CustomText from '../components/CustomText';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {shadowColor} from '../theme/colors';
 
-type Props = {
-  onClose: any;
-};
+type Props = {};
 
-const Contact = ({onClose}: Props) => {
+const Contact = ({}: Props) => {
   const sendEmail = () => {
     const email = 'engrdhakate@gmail.com';
     const subject = 'Application Developer opportunity';
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    backgroundColor: shadowColor,
     width: '100%',
   },
   modalView: {
@@ -63,14 +62,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 12,
     padding: 35,
     paddingBottom: 40,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
     width: '100%',
   },
 });

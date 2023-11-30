@@ -1,4 +1,4 @@
-import {Image, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import FastImage from 'react-native-fast-image';
 
@@ -15,7 +15,7 @@ type Props = {
 };
 
 const Detail = ({route}: Props) => {
-  const {highlight} = route.params;
+  const {highlight, showBackButton} = route.params;
 
   const [highlightData, setHighlightData] = useState();
 
@@ -42,7 +42,7 @@ const Detail = ({route}: Props) => {
     <SafeAreaView style={styles.safeArea}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.container}>
-          <LogoHeader />
+          <LogoHeader showBackButton={showBackButton} />
           <View style={styles.headContainer}>
             <FastImage
               style={styles.fullImage}

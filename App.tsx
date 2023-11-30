@@ -15,8 +15,16 @@ function App(): JSX.Element {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="MainTab" component={MainTabs} />
-          <Stack.Screen name="Detail" component={Detail} />
+          <Stack.Screen
+            name="MainTab"
+            component={MainTabs}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Detail"
+            component={Detail}
+            options={{headerShown: false}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

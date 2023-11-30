@@ -57,11 +57,7 @@ const GuideCard = ({name, subtitle}: Props) => {
         }}
         animationIn={'slideInUp'}
         animationOut={'slideOutDown'}>
-        <Contact
-          onClose={() => {
-            setModalVisible(false);
-          }}
-        />
+        <Contact />
       </ReactNativeModal>
     </View>
   );

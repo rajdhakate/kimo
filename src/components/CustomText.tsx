@@ -1,5 +1,6 @@
 import {StyleSheet, Text} from 'react-native';
 import React from 'react';
+import {primaryColor, secondaryColor} from '../theme/colors';
 
 type Props = {
   textType?: 'body' | 'body-bold' | 'header';
@@ -35,27 +36,27 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 16,
     lineHeight: 20,
-    color: '#001A1A',
+    color: secondaryColor,
   },
   bodyBold: {
     fontFamily: 'IBMPlexMono-Bold',
     fontWeight: '700',
     fontSize: 16,
     lineHeight: 20,
-    color: '#001A1A',
+    color: secondaryColor,
   },
   header: {
     fontFamily: 'IBMPlexMono-Bold',
     fontWeight: '700',
     fontSize: 24,
     lineHeight: 30,
-    color: '#008080',
+    color: primaryColor,
   },
   regular: {
     fontFamily: 'IBMPlexMono-Regular',
     fontWeight: '400',
     fontSize: 16,
     lineHeight: 20,
-    color: '#008080',
+    color: primaryColor,
   },
 });

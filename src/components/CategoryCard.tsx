@@ -1,7 +1,9 @@
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
+
 import CustomText from './CustomText';
-import Arrow from './../assets/svgs/Arrow.svg';
+import ArrowIcon from './../assets/svgs/ArrowIcon';
+import {backgroundColor, primaryColor} from '../theme/colors';
 
 type Props = {
   category: object;
@@ -11,7 +13,7 @@ const CategoryCard = ({category}: Props) => {
   return (
     <TouchableOpacity style={styles.card}>
       <CustomText text={category.name} textType="body" />
-      <Arrow />
+      <ArrowIcon color={primaryColor} />
     </TouchableOpacity>
   );
 };
@@ -23,7 +25,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginTop: 8,
     padding: 24,
-    backgroundColor: '#ffffff',
+    backgroundColor: backgroundColor,
     borderRadius: 8,
     flexDirection: 'row',
     justifyContent: 'space-between',

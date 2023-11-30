@@ -2,6 +2,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import CustomText from './CustomText';
 import {backgroundColor, primaryColor, shadowColor} from '../theme/colors';
+import FastImage from 'react-native-fast-image';
 
 type Props = {
   activity: object;
@@ -17,10 +18,10 @@ const SpotCard = ({activity}: Props) => {
       />
 
       <View style={styles.imageContainer}>
-        <Image
+        <FastImage
           style={styles.fullImage}
           source={{uri: 'https://picsum.photos/300/200'}}
-          resizeMode="cover"
+          resizeMode={FastImage.resizeMode.cover}
         />
       </View>
     </TouchableOpacity>
