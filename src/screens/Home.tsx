@@ -17,6 +17,7 @@ import LogoHeader from '../components/LogoHeader';
 import axiosInstance from '../apis/AxiosInstance';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchHighlights} from '../actions/hightlights';
+import {backgroundColor, primaryColor, primaryLight} from '../theme/colors';
 
 type Props = {};
 
@@ -66,8 +67,8 @@ const Home = (props: Props) => {
           <RefreshControl
             refreshing={isRefreshing}
             onRefresh={onRefresh}
-            colors={['#009688']}
-            tintColor="#009688"
+            colors={[primaryColor]}
+            tintColor={primaryColor}
           />
         }>
         <View style={styles.container}>
@@ -97,7 +98,7 @@ const Home = (props: Props) => {
           </View>
         )}
 
-        <View style={{flex: 1, backgroundColor: '#E6F2F2'}}>
+        <View style={{flex: 1, backgroundColor: primaryLight}}>
           {categories.length > 0 && (
             <View>
               <CustomHeader title="Categories" />
@@ -120,7 +121,7 @@ export default Home;
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: backgroundColor,
   },
   scrollView: {
     flex: 1,

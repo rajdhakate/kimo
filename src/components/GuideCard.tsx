@@ -8,6 +8,7 @@ import {
 import React from 'react';
 import CustomText from './CustomText';
 import FastImage from 'react-native-fast-image';
+import {backgroundColor, primaryColor, secondaryColor} from '../theme/colors';
 
 type Props = {
   name: string;
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
   card: {
     margin: 16,
     padding: 24,
-    backgroundColor: '#ffffff',
+    backgroundColor: backgroundColor,
     borderRadius: 8,
   },
   details: {
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     width: '65%',
   },
   name: {
-    color: '#001A1A',
+    color: secondaryColor,
   },
   subtitle: {
     marginTop: 15,
@@ -79,10 +80,10 @@ const styles = StyleSheet.create({
     paddingTop: 9,
     paddingBottom: 11,
     paddingHorizontal: 24,
-    backgroundColor: '#ffffff',
+    backgroundColor: backgroundColor,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#008080',
+    borderColor: primaryColor,
     height: 40,
     width: 116,
     alignItems: 'center',

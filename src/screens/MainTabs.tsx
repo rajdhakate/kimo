@@ -12,6 +12,7 @@ import HomeIcon from './../assets/svgs/HomeIcon';
 import SurfingIcon from './../assets/svgs/SurfingIcon';
 import HulaIcon from './../assets/svgs/HulaIcon';
 import VulcanoIcon from './../assets/svgs/VulcanoIcon';
+import {backgroundColor, primaryColor, secondaryColor} from '../theme/colors';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -28,12 +29,12 @@ const MainTabs = (props: Props) => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      activeColor="#008080"
-      inactiveColor="#001A1A"
-      barStyle={{backgroundColor: '#ffffff'}}
+      activeColor={primaryColor}
+      inactiveColor={secondaryColor}
+      barStyle={{backgroundColor: backgroundColor}}
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
-          let iconColor = focused ? '#008080' : '#001A1A';
+          let iconColor = focused ? primaryColor : secondaryColor;
 
           if (route.name === 'Home') {
             return <HomeIcon color={iconColor} />;

@@ -1,6 +1,7 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import CustomText from './CustomText';
+import {backgroundColor, primaryColor, shadowColor} from '../theme/colors';
 
 type Props = {
   activity: object;
@@ -31,19 +32,19 @@ export default SpotCard;
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: backgroundColor,
     borderRadius: 4,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginHorizontal: 16,
     marginTop: 8,
-    shadowColor: 'rgba(0, 128, 128, 0.16)',
+    shadowColor: shadowColor,
     shadowOffset: {width: 0, height: 0},
     shadowOpacity: 1,
     shadowRadius: 8,
   },
   title: {
-    color: '#008080',
+    color: primaryColor,
     marginLeft: 16,
     marginVertical: 30,
     width: '55%',

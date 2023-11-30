@@ -1,12 +1,14 @@
 import {Image, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
+import FastImage from 'react-native-fast-image';
+
 import CustomHeader from '../components/CustomHeader';
 import GuideCard from '../components/GuideCard';
 import LogoHeader from '../components/LogoHeader';
 import CustomText from '../components/CustomText';
 import SpotCard from '../components/SpotCard';
 import axiosInstance from '../apis/AxiosInstance';
-import FastImage from 'react-native-fast-image';
+import {backgroundColor, primaryLight} from '../theme/colors';
 
 type Props = {
   route: any;
@@ -64,7 +66,7 @@ const Detail = ({route}: Props) => {
           )}
         </View>
 
-        <View style={{flex: 1, backgroundColor: '#E6F2F2'}}>
+        <View style={{flex: 1, backgroundColor: primaryLight}}>
           <CustomHeader title="Travel Guide" />
 
           <GuideCard name="Raj Dhakate" subtitle="Guide since 2012" />
@@ -79,7 +81,7 @@ export default Detail;
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: backgroundColor,
   },
   scrollView: {
     flex: 1,
