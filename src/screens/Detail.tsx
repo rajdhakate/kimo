@@ -49,6 +49,11 @@ const Detail = ({route}: Props) => {
               source={{uri: highlightData?.image}}
               resizeMode={FastImage.resizeMode.cover}
             />
+
+            <CustomText
+              text={highlightData?.name}
+              style={styles.highlightName}
+            />
           </View>
 
           <CustomText
@@ -90,11 +95,25 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headContainer: {
+    position: 'relative',
     width: '100%',
     aspectRatio: 360 / 240,
   },
   fullImage: {
     width: '100%',
     height: '100%',
+  },
+  highlightName: {
+    position: 'absolute',
+    top: '50%',
+    left: 0,
+    right: 0,
+    transform: [{translateY: -25}],
+    textAlign: 'center',
+    color: backgroundColor,
+    fontSize: 48,
+    fontWeight: '700',
+    lineHeight: 60,
+    opacity: 0.7,
   },
 });
