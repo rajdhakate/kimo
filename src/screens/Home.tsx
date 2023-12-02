@@ -163,7 +163,6 @@ const styles = StyleSheet.create({
   },
   list: {
     width: '100%',
-    paddingBottom: 40,
   },
   separator: {width: 16},
 });

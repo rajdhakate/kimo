@@ -1,5 +1,11 @@
 import React from 'react';
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {Highlight, RootStackParamList} from '../utils/GlobalType';
 import {backgroundColor} from '../theme/colors';
 import CustomText from './CustomText';
@@ -69,6 +75,8 @@ const styles = (isFirst: Boolean, isLast: Boolean) =>
       shadowOffset: {width: 0, height: 0},
       shadowRadius: 5,
       borderRadius: 8,
+      elevation: 8,
+      marginBottom: 40,
     },
     imageContainer: {
       borderTopLeftRadius: 8,

@@ -1,4 +1,4 @@
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import CustomText from './CustomText';
 import {backgroundColor, primaryColor, shadowColor} from '../theme/colors';
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 0},
     shadowOpacity: 1,
     shadowRadius: 8,
+    elevation: Platform.OS === 'android' ? 8 : 0,
   },
   title: {
     color: primaryColor,

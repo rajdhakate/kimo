@@ -1,4 +1,10 @@
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {
+  Platform,
+  SafeAreaView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import HomeIcon from '../assets/svgs/HomeIcon';
 import HulaIcon from '../assets/svgs/HulaIcon';
@@ -10,7 +16,7 @@ import {TabBarProps} from '../utils/GlobalType';
 
 const TabBar = ({state, descriptors, navigation}: TabBarProps) => {
   return (
-    <View style={styles.bar}>
+    <SafeAreaView style={styles.bar}>
       {state.routes.map((route: any, index: number) => {
         const {options} = descriptors[route.key];
         const label =
@@ -71,7 +77,7 @@ const TabBar = ({state, descriptors, navigation}: TabBarProps) => {
           </TouchableOpacity>
         );
       })}
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -80,13 +86,13 @@ export default TabBar;
 const styles = StyleSheet.create({
   bar: {
     flexDirection: 'row',
-    height: 100,
+    height: Platform.OS === 'android' ? 72 : 100,
     backgroundColor: backgroundColor,
-    paddingBottom: 26,
     shadowColor: 'rgba(81, 81, 224, 0.24)',
     shadowOffset: {width: 0, height: -4},
     shadowOpacity: 1,
     shadowRadius: 16,
+    elevation: Platform.OS === 'android' ? 16 : 0,
   },
   tabBarButton: {
     flex: 1,
