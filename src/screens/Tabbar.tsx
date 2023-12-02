@@ -88,7 +88,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: Platform.OS === 'android' ? 72 : 100,
     backgroundColor: backgroundColor,
-    shadowColor: 'rgba(81, 81, 224, 0.24)',
+    shadowColor:
+      Platform.OS === 'android'
+        ? 'rgba(81, 81, 224, 0.74)'
+        : 'rgba(81, 81, 224, 0.24)',
     shadowOffset: {width: 0, height: -4},
     shadowOpacity: 1,
     shadowRadius: 16,

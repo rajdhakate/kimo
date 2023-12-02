@@ -34,7 +34,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 8,
-    shadowColor: 'rgba(7, 56, 56, 0.80)',
+    shadowColor:
+      Platform.OS === 'android'
+        ? 'rgba(7, 56, 56, 1.6)'
+        : 'rgba(7, 56, 56, 0.80)',
     shadowOffset: {width: 0, height: 0},
     shadowOpacity: 1,
     shadowRadius: 8,

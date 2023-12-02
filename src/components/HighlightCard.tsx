@@ -70,7 +70,10 @@ const styles = (isFirst: Boolean, isLast: Boolean) =>
       marginRight: isLast ? 16 : 0,
       height: 354,
       width: 360,
-      shadowColor: 'rgba(0, 128, 128, 0.16)',
+      shadowColor:
+        Platform.OS === 'android'
+          ? 'rgba(0, 128, 128, 0.50)'
+          : 'rgba(0, 128, 128, 0.16)',
       shadowOpacity: 1,
       shadowOffset: {width: 0, height: 0},
       shadowRadius: 5,

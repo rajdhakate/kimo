@@ -1,7 +1,12 @@
 import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import CustomText from './CustomText';
-import {backgroundColor, primaryColor, shadowColor} from '../theme/colors';
+import {
+  androidShadowColor,
+  backgroundColor,
+  primaryColor,
+  shadowColor,
+} from '../theme/colors';
 import FastImage from 'react-native-fast-image';
 
 type Props = {
@@ -39,7 +44,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginHorizontal: 16,
     marginTop: 8,
-    shadowColor: shadowColor,
+    shadowColor: Platform.OS === 'android' ? androidShadowColor : shadowColor,
     shadowOffset: {width: 0, height: 0},
     shadowOpacity: 1,
     shadowRadius: 8,

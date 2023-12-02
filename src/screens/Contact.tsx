@@ -1,8 +1,8 @@
-import {Linking, StyleSheet, View} from 'react-native';
+import {Linking, Platform, StyleSheet, View} from 'react-native';
 import React from 'react';
 import CustomText from '../components/CustomText';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {shadowColor} from '../theme/colors';
+import {androidShadowColor, shadowColor} from '../theme/colors';
 
 type Props = {};
 
@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-end',
-    backgroundColor: shadowColor,
+    backgroundColor:
+      Platform.OS === 'android' ? androidShadowColor : shadowColor,
     width: '100%',
   },
   modalView: {
