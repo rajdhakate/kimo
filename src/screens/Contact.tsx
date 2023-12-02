@@ -26,25 +26,18 @@ const Contact = ({}: Props) => {
 
   return (
     <View style={styles.modalView}>
-      <CustomText
-        text="Raj Dhakate"
-        textType="header"
-        style={styles.marginBottom(24)}
-      />
+      <CustomText text="Raj Dhakate" textType="header" style={styles.name} />
       <TouchableOpacity
         onPress={() => {
           sendEmail();
         }}>
-        <CustomText
-          text="engrdhakate@gmail.com"
-          style={styles.marginBottom(8)}
-        />
+        <CustomText text="engrdhakate@gmail.com" style={styles.contact} />
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
           makePhoneCall();
         }}>
-        <CustomText text="+91-9654343680" style={styles.marginBottom(8)} />
+        <CustomText text="+91-9654343680" style={styles.contact} />
       </TouchableOpacity>
     </View>
   );
@@ -67,7 +60,10 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
     width: '100%',
   },
-  marginBottom: margin => ({
-    marginBottom: margin,
-  }),
+  name: {
+    marginBottom: 24,
+  },
+  contact: {
+    marginBottom: 8,
+  },
 });

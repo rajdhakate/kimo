@@ -4,9 +4,10 @@ import React from 'react';
 import CustomText from './CustomText';
 import ArrowIcon from './../assets/svgs/ArrowIcon';
 import {backgroundColor, primaryColor} from '../theme/colors';
+import {Category} from '../utils/GlobalType';
 
 type Props = {
-  category: object;
+  category: Category;
 };
 
 const CategoryCard = ({category}: Props) => {

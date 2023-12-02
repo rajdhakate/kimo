@@ -1,15 +1,15 @@
 import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import FastImage from 'react-native-fast-image';
-
 import CustomHeader from '../components/CustomHeader';
 import GuideCard from '../components/GuideCard';
 import LogoHeader from '../components/LogoHeader';
 import CustomText from '../components/CustomText';
 import SpotCard from '../components/SpotCard';
-import axiosInstance from '../apis/AxiosInstance';
 import {backgroundColor, primaryLight} from '../theme/colors';
 import PrimaryButton from '../components/PrimaryButton';
+import {Activity, HighlightActivities} from '../utils/GlobalType';
+import {makeApiCall} from '../apis/ApiCall';
 
 type Props = {
   route: any;
@@ -17,70 +17,88 @@ type Props = {
 
 const Detail = ({route}: Props) => {
   const {highlight, showBackButton} = route.params;
-
-  const [highlightData, setHighlightData] = useState();
+  const [highlightData, setHighlightData] = useState<HighlightActivities>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const fetchActivity = async () => {
-    try {
-      const response = await axiosInstance.get(
-        `/v1/activities/${highlight.title}`,
-      );
-      setHighlightData(response.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
+    await makeApiCall(`/v1/activities/${highlight.title}`)
+      .then(response => {
+        setIsLoading(false);
+        setHighlightData(response.data);
+      })
+      .catch(_ => {});
   };
 
   useEffect(() => {
     fetchActivity();
-  }, [highlight]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const renderActivityItem = activity => {
+  const renderActivityItem = (activity: Activity) => {
     return <SpotCard key={activity.name} activity={activity} />;
   };
+
+  const emptyView = (
+    <View style={styles.emptyView}>
+      <CustomText text="No Data Found" />
+    </View>
+  );
+
+  const loadingView = (
+    <View style={styles.emptyView}>
+      <CustomText text="Loading..." />
+    </View>
+  );
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.container}>
           <LogoHeader showBackButton={showBackButton} />
-          <View style={styles.headContainer}>
-            <FastImage
-              style={styles.fullImage}
-              source={{uri: highlightData?.image}}
-              resizeMode={FastImage.resizeMode.cover}
-            />
+          {highlightData ? (
+            <>
+              <View style={styles.headContainer}>
+                <FastImage
+                  style={styles.fullImage}
+                  source={{uri: highlightData.image}}
+                  resizeMode={FastImage.resizeMode.cover}
+                />
 
-            <CustomText
-              text={highlightData?.name}
-              style={styles.highlightName}
-            />
-          </View>
+                <CustomText
+                  text={highlightData.name}
+                  style={styles.highlightName}
+                />
+              </View>
 
-          <CustomText
-            style={{padding: 16, paddingTop: 40, lineHeight: 24}}
-            textType="body"
-            text={highlightData?.description}
-          />
+              <CustomText
+                style={styles.description}
+                textType="body"
+                text={highlightData.description}
+              />
 
-          {highlightData?.activities.length > 0 && (
-            <View style={{marginBottom: 100}}>
-              <CustomHeader title="Top spots" />
+              {highlightData.activities?.length > 0 && (
+                <View style={styles.activities}>
+                  <CustomHeader title="Top spots" />
+                  {highlightData.activities.map(renderActivityItem)}
+                </View>
+              )}
 
-              {highlightData.activities.map(renderActivityItem)}
-            </View>
+              <View
+                style={[
+                  styles.guide,
+                  // eslint-disable-next-line react-native/no-inline-styles
+                  {paddingBottom: showBackButton ? 20 : 80},
+                ]}>
+                <CustomHeader title="Travel Guide" />
+
+                <GuideCard name="Raj Dhakate" subtitle="Guide since 2012" />
+              </View>
+            </>
+          ) : isLoading ? (
+            loadingView
+          ) : (
+            emptyView
           )}
-
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: primaryLight,
-              paddingBottom: showBackButton ? 20 : 80,
-            }}>
-            <CustomHeader title="Travel Guide" />
-
-            <GuideCard name="Raj Dhakate" subtitle="Guide since 2012" />
-          </View>
         </View>
       </ScrollView>
 
@@ -124,4 +142,11 @@ const styles = StyleSheet.create({
     lineHeight: 60,
     opacity: 0.8,
   },
+  description: {padding: 16, paddingTop: 40, lineHeight: 24},
+  activities: {marginBottom: 100},
+  guide: {
+    flex: 1,
+    backgroundColor: primaryLight,
+  },
+  emptyView: {flex: 1, justifyContent: 'center', alignItems: 'center'},
 });

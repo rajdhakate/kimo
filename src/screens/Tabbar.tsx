@@ -1,23 +1,17 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-
 import HomeIcon from '../assets/svgs/HomeIcon';
 import HulaIcon from '../assets/svgs/HulaIcon';
 import SurfingIcon from '../assets/svgs/SurfingIcon';
 import {backgroundColor, primaryColor, secondaryColor} from '../theme/colors';
 import CustomText from '../components/CustomText';
 import VulcanoIcon from '../assets/svgs/VulcanoIcon';
+import {TabBarProps} from '../utils/GlobalType';
 
-type Props = {
-  state: any;
-  descriptors: any;
-  navigation: any;
-};
-
-const TabBar = ({state, descriptors, navigation}: Props) => {
+const TabBar = ({state, descriptors, navigation}: TabBarProps) => {
   return (
     <View style={styles.bar}>
-      {state.routes.map((route, index) => {
+      {state.routes.map((route: any, index: number) => {
         const {options} = descriptors[route.key];
         const label =
           options.tabBarLabel !== undefined
@@ -51,6 +45,7 @@ const TabBar = ({state, descriptors, navigation}: Props) => {
 
         return (
           <TouchableOpacity
+            key={index.toString()}
             accessibilityRole="button"
             accessibilityState={isFocused ? {selected: true} : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}

@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {fetchHighlights} from '../actions/hightlights';
+import {fetchHighlights} from '../actions/highlights';
 
 const highlightsSlice = createSlice({
   name: 'highlights',

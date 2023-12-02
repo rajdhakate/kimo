@@ -1,49 +1,48 @@
-import {
-  Dimensions,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
 import React from 'react';
-import {useNavigation} from '@react-navigation/native';
-
-import ArrowCircular from './../assets/svgs/ArrowCircular.svg';
-import Highlight from '../models/Highlight';
-import CustomText from './CustomText';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Highlight, RootStackParamList} from '../utils/GlobalType';
 import {backgroundColor} from '../theme/colors';
+import CustomText from './CustomText';
+import ArrowCircular from '../assets/svgs/ArrowCircular.svg';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 type Props = {
+  isFirst: boolean;
+  isLast: boolean;
   highlight: Highlight;
 };
 
-const HighlightCard = ({highlight}: Props) => {
-  const navigation = useNavigation();
+const HighlightCard = ({isFirst, isLast, highlight}: Props) => {
+  const _styles = styles(isFirst, isLast);
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const navigateToDetail = async () => {
+    navigation.navigate('Detail', {
+      highlight: highlight,
+      showBackButton: true,
+    });
+  };
 
   return (
-    <TouchableOpacity
-      style={styles.card}
-      onPress={() => {
-        navigation.navigate('Detail', {highlight, showBackButton: true});
-      }}>
-      <View style={styles.imageContainer}>
+    <TouchableOpacity style={_styles.card} onPress={navigateToDetail}>
+      <View style={_styles.imageContainer}>
         <Image
-          style={styles.fullImage}
+          style={_styles.fullImage}
           source={{uri: highlight.image}}
           resizeMode="cover"
         />
       </View>
 
-      <View style={styles.details}>
-        <View style={styles.texts}>
+      <View style={_styles.details}>
+        <View style={_styles.texts}>
           <CustomText
             text={highlight.title}
-            style={styles.title}
+            style={_styles.title}
             textType="header"
           />
           <CustomText
             text={highlight.description}
-            style={styles.subtitle}
+            style={_styles.subtitle}
             textType="body"
           />
         </View>
@@ -56,39 +55,42 @@ const HighlightCard = ({highlight}: Props) => {
 
 export default HighlightCard;
 
-const styles = StyleSheet.create({
-  card: {
-    flex: 1,
-    backgroundColor: backgroundColor,
-    marginLeft: 16,
-    aspectRatio: 340 / 304,
-    shadowColor: 'rgba(0, 128, 128, 0.16)',
-    shadowOpacity: 1,
-    shadowOffset: {width: 0, height: 0},
-    shadowRadius: 5,
-    borderRadius: 8,
-    width: '100%',
-  },
-  imageContainer: {
-    aspectRatio: 368 / 170,
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
-  },
-  fullImage: {
-    width: '100%',
-    height: '100%',
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
-  },
-  details: {
-    margin: 24,
-    alignItems: 'flex-end',
-  },
-  texts: {
-    width: '100%',
-  },
-  title: {},
-  subtitle: {
-    marginTop: 16,
-  },
-});
+const styles = (isFirst: Boolean, isLast: Boolean) =>
+  StyleSheet.create({
+    card: {
+      flex: 1,
+      backgroundColor: backgroundColor,
+      marginLeft: isFirst ? 16 : 0,
+      marginRight: isLast ? 16 : 0,
+      height: 354,
+      width: 360,
+      shadowColor: 'rgba(0, 128, 128, 0.16)',
+      shadowOpacity: 1,
+      shadowOffset: {width: 0, height: 0},
+      shadowRadius: 5,
+      borderRadius: 8,
+    },
+    imageContainer: {
+      borderTopLeftRadius: 8,
+      borderTopRightRadius: 8,
+      height: '50%',
+    },
+    fullImage: {
+      width: '100%',
+      height: '100%',
+      borderTopLeftRadius: 8,
+      borderTopRightRadius: 8,
+    },
+    details: {
+      padding: 24,
+      alignItems: 'flex-end',
+    },
+    texts: {
+      width: '100%',
+      marginBottom: 6,
+    },
+    title: {},
+    subtitle: {
+      marginTop: 16,
+    },
+  });

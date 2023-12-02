@@ -5,7 +5,7 @@ import {backgroundColor, primaryColor, shadowColor} from '../theme/colors';
 import FastImage from 'react-native-fast-image';
 
 type Props = {
-  activity: object;
+  activity: {name: string};
 };
 
 const SpotCard = ({activity}: Props) => {

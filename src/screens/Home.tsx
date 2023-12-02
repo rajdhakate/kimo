@@ -16,17 +16,18 @@ import GuideCard from '../components/GuideCard';
 import LogoHeader from '../components/LogoHeader';
 import axiosInstance from '../apis/AxiosInstance';
 import {useDispatch, useSelector} from 'react-redux';
-import {fetchHighlights} from '../actions/hightlights';
+import {fetchHighlights} from '../actions/highlights';
 import {backgroundColor, primaryColor, primaryLight} from '../theme/colors';
 import PrimaryButton from '../components/PrimaryButton';
+import {ThunkDispatch} from 'redux-thunk';
+import {AnyAction} from 'redux';
+import {Category, Highlight} from '../utils/GlobalType';
 
-type Props = {};
-
-const Home = (props: Props) => {
-  const dispatch = useDispatch();
-  const highlights = useSelector(state => state.highlights);
-  const [categories, setCategories] = useState([]);
-  const [isRefreshing, setRefreshing] = useState(false);
+const Home = () => {
+  const dispatch: ThunkDispatch<any, void, AnyAction> = useDispatch();
+  const highlights = useSelector((state: any) => state.highlights);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [isRefreshing, setRefreshing] = useState<boolean>(false);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -48,16 +49,30 @@ const Home = (props: Props) => {
     dispatch(fetchHighlights());
   }, [dispatch]);
 
-  const highlightKeyExtractor = item => {
+  const highlightKeyExtractor = (item: Highlight) => {
     return item.title.toString();
   };
+  const renderHighlightItem = ({
+    index,
+    item,
+  }: {
+    index: number;
+    item: Highlight;
+  }) => (
+    <HighlightCard
+      key={index.toString()}
+      highlight={item}
+      isFirst={index === 0}
+      isLast={index === highlights.length - 1}
+    />
+  );
 
-  const renderHighlightItem = ({index, item}) => {
-    return <HighlightCard highlight={item} />;
+  const renderCategoryItem = (category: Category) => {
+    return <CategoryCard key={category.name} category={category} />;
   };
 
-  const renderCategoryItem = category => {
-    return <CategoryCard key={categories.name} category={category} />;
+  const renderSeparator = () => {
+    return <View style={styles.separator} />;
   };
 
   return (
@@ -89,18 +104,18 @@ const Home = (props: Props) => {
             <CustomHeader title="Highlights" />
 
             <FlatList
-              style={{height: 340, width: '100%', marginBottom: 40}}
+              style={styles.list}
               showsHorizontalScrollIndicator={false}
               keyExtractor={highlightKeyExtractor}
               data={highlights}
               horizontal
               renderItem={renderHighlightItem}
+              ItemSeparatorComponent={renderSeparator}
             />
           </View>
         )}
 
-        <View
-          style={{flex: 1, backgroundColor: primaryLight, paddingBottom: 80}}>
+        <View style={styles.category}>
           {categories.length > 0 && (
             <View>
               <CustomHeader title="Categories" />
@@ -141,4 +156,14 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  category: {
+    flex: 1,
+    backgroundColor: primaryLight,
+    paddingBottom: 80,
+  },
+  list: {
+    width: '100%',
+    paddingBottom: 40,
+  },
+  separator: {width: 16},
 });
