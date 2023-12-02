@@ -1,5 +1,13 @@
-This is a Kimo [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+This is a Kimo [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli), with **TypeScript**
 
+# Tech stack used
+```bash
+1. React-Native
+2. React Navigation Stack
+3. React Navigation Bottom Tabs
+4. Redux
+5. Axios
+```
 # Getting Started
 
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
